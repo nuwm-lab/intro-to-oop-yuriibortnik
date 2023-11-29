@@ -1,4 +1,4 @@
-public ﻿class QuadraticEquation
+public class QuadraticEquation
 {
     public double b2, b1, b0;
 
