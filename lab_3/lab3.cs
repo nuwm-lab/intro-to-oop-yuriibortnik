@@ -1,5 +1,6 @@
 public class Program
 {
+    // Initialize void CalculateSums
     public static double[] CalculateSums(int a)
     {
         double[] sums = new double[3];
@@ -12,6 +13,7 @@ public class Program
 
     public static void Main()
     {
+        
         Console.Write("Enter an integer (a): ");
         if (int.TryParse(Console.ReadLine(), out int a))
         {
@@ -28,4 +30,5 @@ public class Program
             Console.WriteLine("Invalid input. Please enter a valid integer.");
         }
     }
+    
 }
