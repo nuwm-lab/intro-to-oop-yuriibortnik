@@ -3,29 +3,29 @@ using System;
 // Батьківський клас "Рівняння"
 public class Equation
 {
-    protected double[] Coefficients;  // Масив коефіцієнтів
+    protected double[] coefficients;  // Масив коефіцієнтів
 
     // Конструктор класу, приймає коефіцієнти рівняння
     public Equation(params double[] coefficients)
     {
-        Coefficients = coefficients;
+        this.coefficients = coefficients;
     }
 
     // Віртуальний метод для виведення коефіцієнтів рівняння
     public virtual void DisplayCoefficients()
     {
-        Console.Write("Coefficients: ");
-        Console.WriteLine(string.Join(", ", Coefficients));
+        Console.Write("coefficients: ");
+        Console.WriteLine(string.Join(", ", coefficients));
     }
 
     // Віртуальний метод для перевірки, чи задовольняє число рівнянню
     public virtual bool SatisfiesEquation(double num)
     {
         double result = 0;
-        int power = Coefficients.Length - 1;
+        int power = coefficients.Length - 1;
 
         // Обчислення значення рівняння для заданого числа
-        foreach (double coefficient in Coefficients)
+        foreach (double coefficient in coefficients)
         {
             result += coefficient * Math.Pow(num, power);
             power--;
@@ -54,19 +54,19 @@ public class QuadraticEquation : Equation
     // Метод для знаходження коренів квадратного рівняння
     public string FindRoots()
     {
-        double discriminant = Math.Pow(Coefficients[1], 2) - 4 * Coefficients[0] * Coefficients[2];
+        double discriminant = Math.Pow(coefficients[1], 2) - 4 * coefficients[0] * coefficients[2];
 
         if (discriminant < 0)
             return "No real roots";
         else if (discriminant == 0)
         {
-            double root = -Coefficients[1] / (2 * Coefficients[0]);
+            double root = -coefficients[1] / (2 * coefficients[0]);
             return $"Single real root: {root}";
         }
         else
         {
-            double root1 = (-Coefficients[1] + Math.Sqrt(discriminant)) / (2 * Coefficients[0]);
-            double root2 = (-Coefficients[1] - Math.Sqrt(discriminant)) / (2 * Coefficients[0]);
+            double root1 = (-coefficients[1] + Math.Sqrt(discriminant)) / (2 * coefficients[0]);
+            double root2 = (-coefficients[1] - Math.Sqrt(discriminant)) / (2 * coefficients[0]);
             return $"Two real roots: {root1}, {root2}";
         }
     }
@@ -104,10 +104,10 @@ public class Program
         equation2.DisplayCoefficients();
 
         // Перевірка, чи об'єкт є екземпляром класу QuadraticEquation перед кастом
-        if (equation2 is QuadraticEquation)
+        if (equation2 is QuadraticEquation quadraticEquation)
         {
             // Виклик методу FindRoots, оскільки об'єкт є QuadraticEquation
-            Console.WriteLine(((QuadraticEquation)equation2).FindRoots());
+            Console.WriteLine(quadraticEquation.FindRoots());
         }
         else
         {
