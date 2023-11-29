@@ -1,31 +1,31 @@
 using System;
 
 // Батьківський клас "Рівняння"
-public class Equation
+class Equation
 {
-    protected double[] coefficients;  // Масив коефіцієнтів
+    protected double[] Coefficients;  // Масив коефіцієнтів
 
     // Конструктор класу, приймає коефіцієнти рівняння
     public Equation(params double[] coefficients)
     {
-        this.coefficients = coefficients;
+        Coefficients = coefficients;
     }
 
     // Віртуальний метод для виведення коефіцієнтів рівняння
     public virtual void DisplayCoefficients()
     {
-        Console.Write("coefficients: ");
-        Console.WriteLine(string.Join(", ", coefficients));
+        Console.Write("Coefficients: ");
+        Console.WriteLine(string.Join(", ", Coefficients));
     }
 
     // Віртуальний метод для перевірки, чи задовольняє число рівнянню
     public virtual bool SatisfiesEquation(double num)
     {
         double result = 0;
-        int power = coefficients.Length - 1;
+        int power = Coefficients.Length - 1;
 
         // Обчислення значення рівняння для заданого числа
-        foreach (double coefficient in coefficients)
+        foreach (double coefficient in Coefficients)
         {
             result += coefficient * Math.Pow(num, power);
             power--;
@@ -37,7 +37,7 @@ public class Equation
 }
 
 // Похідний клас "Квадратне рівняння"
-public class QuadraticEquation : Equation
+class QuadraticEquation : Equation
 {
     // Конструктор, викликає конструктор батьківського класу
     public QuadraticEquation(params double[] coefficients) : base(coefficients)
@@ -47,33 +47,33 @@ public class QuadraticEquation : Equation
     // Перевизначений віртуальний метод для виведення коефіцієнтів
     public override void DisplayCoefficients()
     {
-        Console.WriteLine("Quadratic " + base.ToString());
+        Console.WriteLine("Quadratic " + this.ToString());
         base.DisplayCoefficients();
     }
 
     // Метод для знаходження коренів квадратного рівняння
     public string FindRoots()
     {
-        double discriminant = Math.Pow(coefficients[1], 2) - 4 * coefficients[0] * coefficients[2];
+        double discriminant = Math.Pow(Coefficients[1], 2) - 4 * Coefficients[0] * Coefficients[2];
 
         if (discriminant < 0)
             return "No real roots";
         else if (discriminant == 0)
         {
-            double root = -coefficients[1] / (2 * coefficients[0]);
+            double root = -Coefficients[1] / (2 * Coefficients[0]);
             return $"Single real root: {root}";
         }
         else
         {
-            double root1 = (-coefficients[1] + Math.Sqrt(discriminant)) / (2 * coefficients[0]);
-            double root2 = (-coefficients[1] - Math.Sqrt(discriminant)) / (2 * coefficients[0]);
+            double root1 = (-Coefficients[1] + Math.Sqrt(discriminant)) / (2 * Coefficients[0]);
+            double root2 = (-Coefficients[1] - Math.Sqrt(discriminant)) / (2 * Coefficients[0]);
             return $"Two real roots: {root1}, {root2}";
         }
     }
 }
 
 // Похідний клас "Кубічне рівняння"
-public class CubicEquation : Equation
+class CubicEquation : Equation
 {
     // Конструктор, викликає конструктор батьківського класу
     public CubicEquation(params double[] coefficients) : base(coefficients)
@@ -83,13 +83,13 @@ public class CubicEquation : Equation
     // Перевизначений віртуальний метод для виведення коефіцієнтів
     public override void DisplayCoefficients()
     {
-        Console.WriteLine("Cubic " + base.ToString());
+        Console.WriteLine("Cubic " + this.ToString());
         base.DisplayCoefficients();
     }
 }
 
 // Головний клас програми
-public class Program
+class Program
 {
     // Головний метод програми
     static void Main()
@@ -102,7 +102,7 @@ public class Program
         // Створення об'єкта кубічного рівняння через метод CreateEquation
         Equation equation2 = CreateEquation(1, -6, 11, -6);
         equation2.DisplayCoefficients();
-
+        
         // Перевірка, чи об'єкт є екземпляром класу QuadraticEquation перед кастом
         if (equation2 is QuadraticEquation quadraticEquation)
         {
